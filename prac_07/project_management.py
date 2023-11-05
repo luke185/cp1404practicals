@@ -25,7 +25,9 @@ def main():
         elif choice == 'D':
             display_projects(projects)
         elif choice == 'F':
-            pass
+            filter_date = input('Show projects that start after date (dd/mm/yy): ')
+            filter_date = datetime.datetime.strptime(filter_date, "%d/%m/%Y").date()
+            filter_by_date(projects, filter_date)
         elif choice == 'A':
             add_new_project(projects)
         elif choice == 'U':
@@ -90,6 +92,16 @@ def save_projects(filename, projects):
         for project in projects:
             print(f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t"
                   f"{project.completion_percentage}", file=out_file)
+
+
+def filter_by_date(projects, filter_date):
+    """only show projects after a given date and sort by date"""
+    for project in projects:
+        project.start_date = datetime.datetime.strptime(str(project.start_date), "%d/%m/%Y").date()
+    filtered_projects = sorted(projects, key=lambda x: x.start_date, reverse=False)
+    for project in filtered_projects:
+        if project.start_date >= filter_date:
+            print(project)
 
 
 main()
