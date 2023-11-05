@@ -20,7 +20,8 @@ def main():
             filename = input('Filename: ')
             projects = load_projects(filename)
         elif choice == 'S':
-            pass
+            save_file_name = input('Enter filename to save to: ')
+            save_projects(save_file_name, projects)
         elif choice == 'D':
             display_projects(projects)
         elif choice == 'F':
@@ -80,6 +81,15 @@ def update_project(projects):
     new_priority = int(input('New priority: '))
     projects[choice].priority = new_priority
     return projects
+
+
+def save_projects(filename, projects):
+    """save the list of projects to a file"""
+    with open(filename, 'w') as out_file:
+        print("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage", file=out_file)
+        for project in projects:
+            print(f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t"
+                  f"{project.completion_percentage}", file=out_file)
 
 
 main()
