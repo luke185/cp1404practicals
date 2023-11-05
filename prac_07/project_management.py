@@ -8,24 +8,26 @@ from project import Project
 
 MENU = '- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date\n' \
        '- (A)dd new project\n- (U)pdate project\n- (Q)uit'
+DEFAULT_FILE = 'projects.txt'
 
 
 def main():
-    projects = load_projects('projects.txt')
+    projects = load_projects(DEFAULT_FILE)
     print(MENU)
     choice = input('> ').upper()
     while choice != 'Q':
         if choice == 'L':
+            filename = input('Filename: ')
+            projects = load_projects(filename)
+        elif choice == 'S':
             pass
-        if choice == 'S':
+        elif choice == 'D':
+            display_projects(projects)
+        elif choice == 'F':
             pass
-        if choice == 'D':
+        elif choice == 'A':
             pass
-        if choice == 'F':
-            pass
-        if choice == 'A':
-            pass
-        if choice == 'U':
+        elif choice == 'U':
             pass
         else:
             print('Invalid Input')
@@ -34,8 +36,26 @@ def main():
 
 
 def load_projects(filename):
+    """load a projects file and format it into a list of project objects"""
     projects = []
+    with open(filename, 'r') as in_file:
+        in_file.readline()
+        for line in in_file:
+            line = line.strip().split('\t')
+            projects.append(Project(line[0], line[1], int(line[2]), float(line[3]), int(line[4])))
     return projects
+
+
+def display_projects(projects):
+    """display all projects grouped by completion status"""
+    print('Incomplete projects:  ')
+    for project in projects:
+        if project.completion_percentage < 100:
+            print(project)
+    print('Completed projects: ')
+    for project in projects:
+        if project.completion_percentage == 100:
+            print(project)
 
 
 main()
