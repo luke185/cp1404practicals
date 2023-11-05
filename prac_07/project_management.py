@@ -26,7 +26,7 @@ def main():
         elif choice == 'F':
             pass
         elif choice == 'A':
-            pass
+            add_new_project(projects)
         elif choice == 'U':
             pass
         else:
@@ -48,6 +48,7 @@ def load_projects(filename):
 
 def display_projects(projects):
     """display all projects grouped by completion status"""
+    projects.sort()
     print('Incomplete projects:  ')
     for project in projects:
         if project.completion_percentage < 100:
@@ -56,6 +57,16 @@ def display_projects(projects):
     for project in projects:
         if project.completion_percentage == 100:
             print(project)
+
+
+def add_new_project(projects):
+    """add a new project object to the list of projects"""
+    name = input('Name: ')
+    start = input('Start Date: ')
+    priority = int(input('Priority: '))
+    cost = float(input('Cost: '))
+    percentage = int(input('Percentage: '))
+    projects.append(Project(name, start, priority, cost, percentage))
 
 
 main()
