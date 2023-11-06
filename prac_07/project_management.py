@@ -12,6 +12,7 @@ DEFAULT_FILE = 'projects.txt'
 
 
 def main():
+    """Allow user to display and modify a list of projects"""
     projects = load_projects(DEFAULT_FILE)
     print(MENU)
     choice = input('> ').upper()
@@ -25,15 +26,14 @@ def main():
         elif choice == 'D':
             display_projects(projects)
         elif choice == 'F':
-            filter_date = input('Show projects that start after date (dd/mm/yy): ')
-            filter_date = datetime.datetime.strptime(filter_date, "%d/%m/%Y").date()
-            filter_by_date(projects, filter_date)
+            filter_by_date(projects)
         elif choice == 'A':
             add_new_project(projects)
         elif choice == 'U':
-            projects = update_project(projects)
+            update_project(projects)
         else:
             print('Invalid Input')
+        print(MENU)
         choice = input('> ').upper()
     print('Thanks : )')
 
@@ -58,7 +58,7 @@ def display_projects(projects):
             print(project)
     print('Completed projects: ')
     for project in projects:
-        if project.completion_percentage == 100:
+        if project.is_complete():
             print(project)
 
 
@@ -82,7 +82,6 @@ def update_project(projects):
     projects[choice].completion_percentage = new_percentage
     new_priority = int(input('New priority: '))
     projects[choice].priority = new_priority
-    return projects
 
 
 def save_projects(filename, projects):
@@ -94,12 +93,11 @@ def save_projects(filename, projects):
                   f"{project.completion_percentage}", file=out_file)
 
 
-def filter_by_date(projects, filter_date):
+def filter_by_date(projects):
     """only show projects after a given date and sort by date"""
-    for project in projects:
-        project.start_date = datetime.datetime.strptime(str(project.start_date), "%d/%m/%Y").date()
-    filtered_projects = sorted(projects, key=lambda x: x.start_date, reverse=False)
-    for project in filtered_projects:
+    filter_date = input('Show projects that start after date (dd/mm/yy): ')
+    filter_date = datetime.datetime.strptime(filter_date, "%d/%m/%Y").date()
+    for project in sorted(projects, key=lambda x: x.start_date):
         if project.start_date >= filter_date:
             print(project)
 
