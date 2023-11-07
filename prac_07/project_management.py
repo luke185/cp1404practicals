@@ -5,6 +5,7 @@ Actual time:
 """
 import datetime
 from project import Project
+from operator import attrgetter
 
 MENU = '- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date\n' \
        '- (A)dd new project\n- (U)pdate project\n- (Q)uit'
@@ -97,7 +98,8 @@ def filter_by_date(projects):
     """only show projects after a given date and sort by date"""
     filter_date = input('Show projects that start after date (dd/mm/yy): ')
     filter_date = datetime.datetime.strptime(filter_date, "%d/%m/%Y").date()
-    for project in sorted(projects, key=lambda x: x.start_date):
+    projects.sort(key=attrgetter('start_date'))
+    for project in projects:
         if project.start_date >= filter_date:
             print(project)
 
