@@ -2,6 +2,8 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import StringProperty
 
+CONVERSION_RATIO = 1.6
+
 
 class ConvertMilesToKM(App):
     """Convert Miles to KM from user input"""
@@ -16,10 +18,17 @@ class ConvertMilesToKM(App):
 
     def handle_convert(self):
         """Convert user inputted Miles to KM"""
-        self.output = str(float(self.root.ids.miles_input.text) * 1.6)
+        try:
+            self.output = str(float(self.root.ids.miles_input.text) * CONVERSION_RATIO)
+        except ValueError:
+            self.output = '0.0'
 
     def handle_increment(self, increment):
-        self.root.ids.miles_input.text = str(float(self.root.ids.miles_input.text) + increment)
+        """Change input field by given increment"""
+        try:
+            self.root.ids.miles_input.text = str(float(self.root.ids.miles_input.text) + increment)
+        except ValueError:
+            self.root.ids.miles_input.text = str(0 + increment)
 
 
 ConvertMilesToKM().run()
