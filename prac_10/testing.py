@@ -22,7 +22,7 @@ def is_long_word(word, length=5):
     >>> is_long_word("Python", 6)
     True
     """
-    return len(word) > length
+    return len(word) >= length
 
 
 def run_tests():
@@ -45,13 +45,7 @@ def run_tests():
 
 
 run_tests()
-
-# TODO: 3. Uncomment the following line and run the doctests
-# (PyCharm may see your >>> doctest comments and run doctests anyway.)
-# doctest.testmod()
-
-# TODO: 4. Fix the failing is_long_word function
-# (don't change the tests, change the function!)
+doctest.testmod()
 
 # TODO: 5. Write and test a function to format a phrase as a sentence,
 # starting with a capital and ending with a single full stop.
