@@ -1,3 +1,5 @@
+"""Prac 9 Taxi Simulator Program"""
+
 from taxi import Taxi
 from silver_service_taxi import SilverServiceTaxi
 
@@ -32,6 +34,7 @@ def main():
 
 
 def drive(taxi):
+    """Drive current taxi a given distance, then return the price of the trip"""
     taxi.start_fare()
     distance = int(input('Drive how far? '))
     taxi.drive(distance)
@@ -41,17 +44,20 @@ def drive(taxi):
 
 
 def choose_taxi(taxis):
+    """Allow the user to choose a valid taxi"""
     display_taxis(taxis)
     choice = get_valid_taxi(taxis)
     return choice
 
 
 def display_taxis(taxis):
+    """Display the list of taxis"""
     for i, taxi in enumerate(taxis):
         print(f"{i} - {taxi}")
 
 
 def get_valid_taxi(taxis):
+    """Get a valid Taxi object from the list of taxis"""
     while True:
         try:
             choice = int(input("Choose taxi: "))
