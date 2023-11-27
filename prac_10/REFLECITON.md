@@ -1,0 +1,9 @@
+- Regarding the estimates that you did for practical tasks, how was your accuracy and did your accuracy improve during the course of the subject?
+  - My accuracy was not good to begin with, usually I would guess I'd finish faster than I actually did, but it did improve over time as I started to learn how long certain things would generally take to finish
+- Regarding code reviews, what have you learned from both being reviewed and doing reviews?
+  - How pull requests work was a big thing. In terms of the actual reviews learning how to give good constructive feedback that didn't come off as too harsh was one thing. Another was getting better at reading over code and figuring out how it works. It also made me think more about how my own code was going to be seen and how I might improve it, and make sure I don't miss anything.
+- Regarding the practical tasks overall, what would you change if you were in charge of the subject?
+  - I can't really think of anything I'd change, I don't feel like I miss lacking / missing anything from the pracs.
+- Code reviews that I have done:
+  - [Prac 5 review for talitha1234](https://github.com/talitha1234/cp1404practicals/pull/3)
+  - [Prac 7 review for calljriley3](https://github.com/callumjriley3/cp1404practicals/pull/5)
